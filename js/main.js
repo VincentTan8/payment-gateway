@@ -8,6 +8,11 @@ payBtn.addEventListener('click', () => {
     postPayment()
 })
 
+const addCustomerBtn = document.getElementById('addCustomerBtn')
+addCustomerBtn.addEventListener('click', () => {
+    createCustomer()
+})
+
 function addItem() {
     // Create a new "window" div
     const entryDiv = document.createElement('div')
@@ -59,8 +64,7 @@ async function postPayment() {
         totalPay += entry.totalAmount.value
         itemData.push(entry)
     })
-    
-        
+     
     if(itemList) {
         // Prepare data to send
         const data = { 
@@ -115,4 +119,38 @@ async function postPayment() {
         }
     } else 
         alert('Invalid Payment Input')
+}
+
+async function createCustomer() {
+    const data = {
+            contact: {phone: '+639334565456', email: 'maya.juan@mail.com'},
+            firstName: 'Vincent',
+            middleName: 's',
+            lastName: 'p',
+    }
+
+    try {
+        const response = await fetch('https://pg-sandbox.paymaya.com/payments/v1/customers', {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: 'Basic c2stS2ZtZkxKWEZkVjV0MWluWU44bElPd1NydWVDMUcyN1NDQWtsQnFZQ2RyVTo='
+            },
+            body: JSON.stringify(data)
+        })
+
+        // Handle the response
+        const result = await response.json()
+        if(response.status === 200) {
+            //save this info
+            console.log(result.id)
+        }
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+async function createCard() {
+    
 }
