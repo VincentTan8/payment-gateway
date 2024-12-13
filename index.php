@@ -21,10 +21,17 @@
     <div class="flex">
         <div class="window">
             <span class="text">Payment Test</span>
-            <label for="itemInput">Enter item amount below:</label>
-            <input type="text" id="itemInput" name="itemInput" placeholder="Amount here">
-            <label for="payInput">Enter amount below:</label>
-            <input type="text" id="payInput" name="payInput" placeholder="Amount here">
+            <div id="itemParent">
+                <div class="flex column item">
+                    <label for="itemName">Enter item name below:</label>
+                    <input type="text" class="itemName" name="itemName" placeholder="Item name here">
+                    <label for="itemAmt">Enter item amount below:</label>
+                    <input type="text" class="itemAmt" name="itemAmt" placeholder="Item amount here">
+                    <label for="itemQty">Enter item quantity below:</label>
+                    <input type="text" class="itemQty" name="itemQty" placeholder="Item quantity here">
+                </div>
+            </div>
+            <button id="addItemBtn">Add Item</button>
             <button id="payBtn">Pay Now</button>
         </div>
     </div>
