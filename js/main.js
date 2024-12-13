@@ -13,6 +13,11 @@ addCustomerBtn.addEventListener('click', () => {
     createCustomer()
 })
 
+const addCardBtn = document.getElementById('addCardBtn')
+addCardBtn.addEventListener('click', () => {
+    createCard()
+})
+
 function addItem() {
     // Create a new "window" div
     const entryDiv = document.createElement('div')
@@ -152,5 +157,33 @@ async function createCustomer() {
 }
 
 async function createCard() {
-    
+    const data = {
+        card: {
+            expMonth: '12', 
+            number: '4123450131001381', 
+            expYear: '2025', 
+            cvc: '123'
+        }
+    }
+
+    try {
+        const response = await fetch('https://pg-sandbox.paymaya.com/payments/v1/payment-tokens', {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: 'Basic cGstZW80c0wzOTNDV1U1S212ZUpVYVc4VjczMFRUZWkyelk4ekU0ZEhKRHhrRjo='
+            },
+            body: JSON.stringify(data)
+        })
+
+        // Handle the response
+        const result = await response.json()
+        if(response.status === 200) {
+            //save this info
+            console.log(result.paymentTokenId)
+        }
+    } catch (error) {
+        console.error('Error:', error)
+    }
 }
