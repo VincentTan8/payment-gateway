@@ -29,6 +29,7 @@
                     <input type="text" class="itemAmt" name="itemAmt" placeholder="Item amount here">
                     <label for="itemQty">Enter item quantity below:</label>
                     <input type="text" class="itemQty" name="itemQty" placeholder="Item quantity here">
+                    <button class="remove-entry">Remove Item</button>
                 </div>
             </div>
             <button id="addItemBtn">Add Item</button>
