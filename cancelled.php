@@ -21,6 +21,7 @@
     <div class="flex">
         <div class="window">
             <span class="text">Payment Cancelled!</span>
+            <a href="index.php"><button>Back to home</button></a>
         </div>
     </div>
 
