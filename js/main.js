@@ -8,6 +8,32 @@ payBtn.addEventListener('click', () => {
     postPayment()
 })
 
+function addItem() {
+    // Create a new "window" div
+    const entryDiv = document.createElement('div')
+    entryDiv.className = 'flex column item'
+
+    // Add text fields and other elements
+    entryDiv.innerHTML = `
+        <label for="itemName">Enter item name below:</label>
+        <input type="text" class="itemName" name="itemName" placeholder="Item name here">
+        <label for="itemAmt">Enter item amount below:</label>
+        <input type="text" class="itemAmt" name="itemAmt" placeholder="Item amount here">
+        <label for="itemQty">Enter item quantity below:</label>
+        <input type="text" class="itemQty" name="itemQty" placeholder="Item quantity here">
+        <button class="remove-entry">Remove Item</button>
+    `
+    // Append the new entry to the entries container
+    const entriesContainer = document.getElementById('itemParent')
+    entriesContainer.appendChild(entryDiv)
+
+    // Add event listener to remove button
+    const removeButton = entryDiv.querySelector('.remove-entry')
+    removeButton.addEventListener('click', () => {
+        entryDiv.remove()
+    })
+}
+
 async function postPayment() {
     const itemList = document.querySelectorAll('.item')
     const payCurrency = "PHP"
