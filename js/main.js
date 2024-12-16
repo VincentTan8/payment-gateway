@@ -172,8 +172,9 @@ async function createCustomer() {
 }
 
 async function createCard() {
-    //sandbox card num: 4123450131001381
-    const cardNum = document.querySelector('.cardNumField').value
+
+    const cardNum = document.getElementById('cardNumField').value
+    console.log(cardNum)
     const expMonth = document.querySelector('.expMonthField').value
     const expYear = document.querySelector('.expYearField').value
     const cvc = document.querySelector('.cvcField').value
@@ -239,7 +240,7 @@ async function linkCardToCustomer() {
         if(response.status === 200) {
             //save this info
             console.log("card token id "+result.cardTokenId)
-            return { customerId, cardTokenId: result.cardTokenId }
+            cardTokenId = result.cardTokenId
             setTimeout(() => {
                 window.location.href = result.verificationUrl
             }, 50)
@@ -250,7 +251,7 @@ async function linkCardToCustomer() {
 }
 
 async function createVaultedPayment() {
-    const { customerId, cardTokenId } = await linkCardToCustomer() 
+    //add amount here
 
     const data = {
         totalAmount: {currency: 'PHP', amount: 1234},
