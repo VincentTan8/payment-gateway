@@ -150,6 +150,7 @@ async function createCustomer() {
         if(response.status === 200) {
             //save this info
             console.log(result.id)
+            return result.id
         }
     } catch (error) {
         console.error('Error:', error)
@@ -182,6 +183,46 @@ async function createCard() {
         if(response.status === 200) {
             //save this info
             console.log(result.paymentTokenId)
+            return result.paymentTokenId
+        }
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+async function linkCardToCustomer() {
+    const customerId = createCustomer()
+    const paymentTokenId = createCard()
+    const data = {
+        isDefault: true, //makes the card default of the customer
+        redirectUrl: {
+            success: 'http://localhost/payment-gateway/success.php',
+            failure: 'http://localhost/payment-gateway/failed.php',
+            cancel: 'http://localhost/payment-gateway/cancelled.php'
+        },
+        paymentTokenId: paymentTokenId,
+    }
+
+    try {
+        const response = await fetch(`https://pg-sandbox.paymaya.com/payments/v1/customers/${customerId}/cards`, {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: 'Basic cGstZW80c0wzOTNDV1U1S212ZUpVYVc4VjczMFRUZWkyelk4ekU0ZEhKRHhrRjo='
+            },
+            body: JSON.stringify(data)
+        })
+
+        // Handle the response
+        const result = await response.json()
+        if(response.status === 200) {
+            //save this info
+            console.log(result.cardTokenId)
+            return result.cardTokenId
+            setTimeout(() => {
+                window.location.href = result.verificationUrl
+            }, 50)
         }
     } catch (error) {
         console.error('Error:', error)
