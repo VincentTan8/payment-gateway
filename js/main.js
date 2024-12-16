@@ -1,3 +1,5 @@
+let customerId, cardTokenId
+
 const addItemBtn = document.getElementById('addItemBtn')
 addItemBtn.addEventListener('click', () => {
     addItem()
@@ -48,7 +50,7 @@ function addItem() {
         entryDiv.remove()
     })
 }
-
+//maya checkout
 async function postPayment() {
     const itemList = document.querySelectorAll('.item')
     const payCurrency = "PHP"
@@ -132,11 +134,17 @@ async function postPayment() {
 }
 
 async function createCustomer() {
+    const phone = document.querySelector('.phoneField').value
+    const email = document.querySelector('.emailField').value
+    const firstName = document.querySelector('.fNameField').value
+    const middleName = document.querySelector('.mNameField').value
+    const lastName = document.querySelector('.lNameField').value
+
     const data = {
-            contact: {phone: '+639334565456', email: 'maya.juan@mail.com'},
-            firstName: 'Vincent',
-            middleName: 's',
-            lastName: 'p',
+            contact: {phone: phone, email: email},
+            firstName: firstName,
+            middleName: middleName,
+            lastName: lastName,
     }
 
     try {
@@ -155,7 +163,8 @@ async function createCustomer() {
         if(response.status === 200) {
             //save this info
             console.log("customer id "+result.id)
-            return result.id
+            customerId = result.id
+            return customerId
         }
     } catch (error) {
         console.error('Error:', error)
