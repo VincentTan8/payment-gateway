@@ -18,6 +18,11 @@ addCardBtn.addEventListener('click', () => {
     createCard()
 })
 
+const payAndSaveBtn = document.getElementById('payAndSaveBtn')
+payAndSaveBtn.addEventListener('click', () => {
+    createVaultedPayment()
+})
+
 function addItem() {
     // Create a new "window" div
     const entryDiv = document.createElement('div')
@@ -149,7 +154,7 @@ async function createCustomer() {
         const result = await response.json()
         if(response.status === 200) {
             //save this info
-            console.log(result.id)
+            console.log("customer id "+result.id)
             return result.id
         }
     } catch (error) {
@@ -182,7 +187,7 @@ async function createCard() {
         const result = await response.json()
         if(response.status === 200) {
             //save this info
-            console.log(result.paymentTokenId)
+            console.log("payment token id "+result.paymentTokenId)
             return result.paymentTokenId
         }
     } catch (error) {
@@ -191,8 +196,8 @@ async function createCard() {
 }
 
 async function linkCardToCustomer() {
-    const customerId = createCustomer()
-    const paymentTokenId = createCard()
+    const customerId = await createCustomer()
+    const paymentTokenId = await createCard()
     const data = {
         isDefault: true, //makes the card default of the customer
         redirectUrl: {
@@ -209,7 +214,7 @@ async function linkCardToCustomer() {
             headers: {
                 accept: 'application/json',
                 'content-type': 'application/json',
-                authorization: 'Basic cGstZW80c0wzOTNDV1U1S212ZUpVYVc4VjczMFRUZWkyelk4ekU0ZEhKRHhrRjo='
+                authorization: 'Basic c2stS2ZtZkxKWEZkVjV0MWluWU44bElPd1NydWVDMUcyN1NDQWtsQnFZQ2RyVTo='
             },
             body: JSON.stringify(data)
         })
@@ -218,8 +223,46 @@ async function linkCardToCustomer() {
         const result = await response.json()
         if(response.status === 200) {
             //save this info
-            console.log(result.cardTokenId)
-            return result.cardTokenId
+            console.log("card token id "+result.cardTokenId)
+            return { customerId, cardTokenId: result.cardTokenId }
+            setTimeout(() => {
+                window.location.href = result.verificationUrl
+            }, 50)
+        }
+    } catch (error) {
+        console.error('Error:', error)
+    }
+}
+
+async function createVaultedPayment() {
+    const { customerId, cardTokenId } = await linkCardToCustomer() 
+
+    const data = {
+        totalAmount: {currency: 'PHP', amount: 1234},
+        redirectUrl: {
+            success: 'http://localhost/payment-gateway/success.php',
+            failure: 'http://localhost/payment-gateway/failed.php',
+            cancel: 'http://localhost/payment-gateway/cancelled.php'
+        },
+    }
+    
+    try {
+        const response = await fetch(`https://pg-sandbox.paymaya.com/payments/v1/customers/${customerId}/cards/${cardTokenId}/payments`, {
+            method: 'POST',
+            headers: {
+                accept: 'application/json',
+                'content-type': 'application/json',
+                authorization: 'Basic c2stS2ZtZkxKWEZkVjV0MWluWU44bElPd1NydWVDMUcyN1NDQWtsQnFZQ2RyVTo='
+            },
+            body: JSON.stringify(data)
+        })
+
+        // Handle the response
+        const result = await response.json()
+        if(response.status === 200) {
+            //save this info
+            console.log("vaulted result ")
+            console.dir(result)
             setTimeout(() => {
                 window.location.href = result.verificationUrl
             }, 50)

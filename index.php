@@ -29,6 +29,7 @@
             <span class="text">Pay and Add Card</span>
             <button id="addCustomerBtn">Add customer</button>
             <button id="addCardBtn">Add card</button>
+            <button id="payAndSaveBtn">Pay and Save a Card</button>
         </div>
     </div>
 
