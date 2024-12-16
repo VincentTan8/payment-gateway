@@ -1,4 +1,9 @@
 let customerId, cardTokenId
+const logBtn = document.getElementById('logBtn')
+logBtn.addEventListener('click', () => {
+    console.log("customer id "+customerId)
+    console.log("card token id "+cardTokenId)
+})
 
 const addItemBtn = document.getElementById('addItemBtn')
 addItemBtn.addEventListener('click', () => {
@@ -241,6 +246,7 @@ async function linkCardToCustomer() {
             //save this info
             console.log("card token id "+result.cardTokenId)
             cardTokenId = result.cardTokenId
+            return cardTokenId
             setTimeout(() => {
                 window.location.href = result.verificationUrl
             }, 50)
@@ -251,10 +257,12 @@ async function linkCardToCustomer() {
 }
 
 async function createVaultedPayment() {
-    //add amount here
+    await linkCardToCustomer()
+    
+    const totalAmt = document.querySelector('.totalAmtVault').value
 
     const data = {
-        totalAmount: {currency: 'PHP', amount: 1234},
+        totalAmount: {currency: 'PHP', amount: parseInt(totalAmt)},
         redirectUrl: {
             success: 'http://localhost/payment-gateway/success.php',
             failure: 'http://localhost/payment-gateway/failed.php',
