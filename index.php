@@ -42,7 +42,11 @@
         <div class="window">
             <span class="text">Add Card</span>
             <label for="cardNumField">Enter card num below:</label>
-            <input type="text" class="cardNumField" name="cardNumField" placeholder="Card number here">
+            <select id="cardNumField" class="styled-select">
+                <option value="4123450131001381">4123450131001381</option>
+                <option value="4123450131001522">4123450131001522</option>
+                <option value="4123450131004443">4123450131004443</option>
+            </select>
             <label for="expMonthField">Enter expiry month below:</label>
             <input type="text" class="expMonthField" name="expMonthField" placeholder="Expiry month here">
             <label for="expYearField">Enter expiry year below:</label>
@@ -50,6 +54,8 @@
             <label for="cvcField">Enter cvc below:</label>
             <input type="text" class="cvcField" name="cvcField" placeholder="CVC here">
             <button id="addCardBtn">Add card</button>
+        </div>
+        <div class="window">
             <button id="payAndSaveBtn">Pay and Save a Card</button>
         </div>
     </div>
