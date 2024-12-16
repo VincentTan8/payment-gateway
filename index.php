@@ -20,7 +20,7 @@
 <body>
     <div class="flex">
         <div class="window">
-            <span class="text">Payment Test</span>
+            <span class="text">Maya Checkout</span>
             <div id="itemParent"></div>
             <button id="addItemBtn">Add Item</button>
             <button id="payBtn">Pay Now</button>
@@ -56,7 +56,10 @@
             <button id="addCardBtn">Add card</button>
         </div>
         <div class="window">
+            <label for="totalAmtVault">Enter total amount:</label>
+            <input type="text" class="totalAmtVault" name="totalAmtVault" placeholder="Total amount here">
             <button id="payAndSaveBtn">Pay and Save a Card</button>
+            <button id="logBtn">Log Tokens</button>
         </div>
     </div>
 
