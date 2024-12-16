@@ -172,12 +172,18 @@ async function createCustomer() {
 }
 
 async function createCard() {
+    //sandbox card num: 4123450131001381
+    const cardNum = document.querySelector('.cardNumField').value
+    const expMonth = document.querySelector('.expMonthField').value
+    const expYear = document.querySelector('.expYearField').value
+    const cvc = document.querySelector('.cvcField').value
+
     const data = {
         card: {
-            expMonth: '12', 
-            number: '4123450131001381', 
-            expYear: '2025', 
-            cvc: '123'
+            expMonth: expMonth, 
+            number: cardNum, 
+            expYear: expYear, 
+            cvc: cvc,
         }
     }
 
