@@ -75,10 +75,19 @@ button:active {
     gap: 0.25rem;
 }
 
+.row {
+    flex-direction: row;
+    gap: 0.25rem;
+}
+
 .item {
     border: 2px solid #1e3246;
     border-radius: 5px; 
     padding: 1rem;
+}
+
+.wrapLongText {
+    word-break: break-all;
 }
 
 .window {
