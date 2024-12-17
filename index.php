@@ -28,24 +28,24 @@
         <div class="window">
             <span class="text">Add Customer</span>
             <label for="phoneField">Enter phone number below:</label>
-            <input type="text" class="phoneField" name="phoneField" placeholder="+639991234567">
+            <input type="text" class="phoneField" name="phoneField" placeholder="+639991234567" value="+639991234567">
             <label for="emailField">Enter email below:</label>
-            <input type="text" class="emailField" name="emailField" placeholder="maya.juan@gmail.com">
+            <input type="text" class="emailField" name="emailField" placeholder="maya.juan@gmail.com"
+                value="maya.juan@gmail.com">
             <label for="fNameField">Enter first name below:</label>
-            <input type="text" class="fNameField" name="fNameField" placeholder="Pay">
+            <input type="text" class="fNameField" name="fNameField" placeholder="Pay" value="Pay">
             <label for="mNameField">Enter middle name below:</label>
-            <input type="text" class="mNameField" name="mNameField" placeholder="Maya">
+            <input type="text" class="mNameField" name="mNameField" placeholder="Maya" value="Maya">
             <label for="lNameField">Enter last name below:</label>
-            <input type="text" class="lNameField" name="lNameField" placeholder="Juan">
-            <button id="addCustomerBtn">Add customer</button>
+            <input type="text" class="lNameField" name="lNameField" placeholder="Juan" value="Juan">
+            <!-- <button id="addCustomerBtn">Add customer</button> -->
         </div>
         <div class="window">
             <span class="text">Add Card</span>
             <label for="cardNumField">Enter card num below:</label>
             <select id="cardNumField" class="styled-select">
                 <option value="4123450131001381">4123450131001381</option>
-                <option value="4123450131001522">4123450131001522</option>
-                <option value="4123450131004443">4123450131004443</option>
+                <option value="4123450131000508">4123450131000508</option>
             </select>
             <label for="expMonthField">Enter expiry month below:</label>
             <input type="text" class="expMonthField" name="expMonthField" placeholder="Expiry month here">
@@ -53,13 +53,29 @@
             <input type="text" class="expYearField" name="expYearField" placeholder="Expiry year here">
             <label for="cvcField">Enter cvc below:</label>
             <input type="text" class="cvcField" name="cvcField" placeholder="CVC here">
-            <button id="addCardBtn">Add card</button>
+            <!-- <button id="addCardBtn">Add card</button> -->
         </div>
         <div class="window">
+            <button id="linkCardBtn">Link Card to Customer</button>
+
             <label for="totalAmtVault">Enter total amount:</label>
             <input type="text" class="totalAmtVault" name="totalAmtVault" placeholder="Total amount here">
             <button id="payAndSaveBtn">Pay and Save a Card</button>
             <button id="logBtn">Log Tokens</button>
+        </div>
+    </div>
+    <div class="flex">
+        <div class="window" style="width: 100%;">
+            <span class="text">Saved Customers with Cards</span>
+            <div id="savedCards">
+                <div class="flex row item">
+                    <span id="custID" class="wrapLongText">1af2da92-3826-4bad-b963-4502a84d47bf</span>
+                    <span id="cardID"
+                        class="wrapLongText">A4hRK46ejbep0BN1ulzrC6IHnsWoR93gBXGAegjrVlMcr3JOh04fPtt37vUDpzWvNmiZkUlIugjLqRvxcPB0SxsddBaOoPD0dCUeNyJRy2DuK03dpF1NQwFwwscGlp7Gm7osvZDD3dxElvApVVq9DjdXNOi3nL1edqjrfKpa3M
+                    </span>
+                    <button id="autoDeductBtn">Auto Deduct Card</button>
+                </div>
+            </div>
         </div>
     </div>
 
