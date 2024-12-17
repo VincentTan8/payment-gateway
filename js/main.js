@@ -15,14 +15,19 @@ payBtn.addEventListener('click', () => {
     postPayment()
 })
 
-const addCustomerBtn = document.getElementById('addCustomerBtn')
-addCustomerBtn.addEventListener('click', () => {
-    createCustomer()
-})
+// const addCustomerBtn = document.getElementById('addCustomerBtn')
+// addCustomerBtn.addEventListener('click', () => {
+//     createCustomer()
+// })
 
-const addCardBtn = document.getElementById('addCardBtn')
-addCardBtn.addEventListener('click', () => {
-    createCard()
+// const addCardBtn = document.getElementById('addCardBtn')
+// addCardBtn.addEventListener('click', () => {
+//     createCard()
+// })
+
+const linkCardBtn = document.getElementById('linkCardBtn')
+linkCardBtn.addEventListener('click', () => {
+    linkCardToCustomer()
 })
 
 const payAndSaveBtn = document.getElementById('payAndSaveBtn')
@@ -256,9 +261,7 @@ async function linkCardToCustomer() {
     }
 }
 
-async function createVaultedPayment() {
-    await linkCardToCustomer()
-    
+async function createVaultedPayment(custId = customerId, cTokenId = cardTokenId) {    
     const totalAmt = document.querySelector('.totalAmtVault').value
 
     const data = {
@@ -271,7 +274,7 @@ async function createVaultedPayment() {
     }
     
     try {
-        const response = await fetch(`https://pg-sandbox.paymaya.com/payments/v1/customers/${customerId}/cards/${cardTokenId}/payments`, {
+        const response = await fetch(`https://pg-sandbox.paymaya.com/payments/v1/customers/${custId}/cards/${cTokenId}/payments`, {
             method: 'POST',
             headers: {
                 accept: 'application/json',
@@ -290,8 +293,32 @@ async function createVaultedPayment() {
             setTimeout(() => {
                 window.location.href = result.verificationUrl
             }, 50)
-        }
+        } else 
+            console.log(response.status)
     } catch (error) {
         console.error('Error:', error)
     }
+}
+
+function addSavedCard() {
+    // Create a new "window" div
+    const entryDiv = document.createElement('div')
+    entryDiv.className = 'flex row item'
+
+    // Add text fields and other elements
+    entryDiv.innerHTML = `
+        <span id="custID" class="wrapLongText">1af2da92-3826-4bad-b963-4502a84d47bf</span>
+        <span id="cardID"
+            class="wrapLongText">A4hRK46ejbep0BN1ulzrC6IHnsWoR93gBXGAegjrVlMcr3JOh04fPtt37vUDpzWvNmiZkUlIugjLqRvxcPB0SxsddBaOoPD0dCUeNyJRy2DuK03dpF1NQwFwwscGlp7Gm7osvZDD3dxElvApVVq9DjdXNOi3nL1edqjrfKpa3M
+        </span>
+        <button id="autoDeductBtn">Auto Deduct Card</button>
+    `
+    // Append the new entry to the entries container
+    const entriesContainer = document.getElementById('savedCards')
+    entriesContainer.appendChild(entryDiv)
+
+    const autoDeductBtn = document.getElementById('autoDeductBtn')
+    autoDeductBtn.addEventListener('click', () => {
+        createVaultedPayment(customerId, cardTokenId)
+    })
 }
