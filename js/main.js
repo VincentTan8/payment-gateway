@@ -251,6 +251,10 @@ async function linkCardToCustomer() {
             //save this info
             console.log("card token id "+result.cardTokenId)
             cardTokenId = result.cardTokenId
+
+            document.getElementById('custID').textContent = customerId
+            document.getElementById('cardID').textContent = cardTokenId
+
             return cardTokenId
             setTimeout(() => {
                 window.location.href = result.verificationUrl
@@ -261,7 +265,7 @@ async function linkCardToCustomer() {
     }
 }
 
-async function createVaultedPayment(custId = customerId, cTokenId = cardTokenId) {    
+async function createVaultedPayment(custId = customerId, cTokenId = cardTokenId, vaulted = false) {    
     const totalAmt = document.querySelector('.totalAmtVault').value
 
     const data = {
@@ -291,7 +295,10 @@ async function createVaultedPayment(custId = customerId, cTokenId = cardTokenId)
             console.log("vaulted result ")
             console.dir(result)
             setTimeout(() => {
-                window.location.href = result.verificationUrl
+                if(!vaulted)
+                    window.open(result.verificationUrl, '_blank')
+                else
+                    alert(result.status+"! Paid with "+result.fundSource.details.masked)
             }, 50)
         } else 
             console.log(response.status)
@@ -322,3 +329,10 @@ function addSavedCard() {
         createVaultedPayment(customerId, cardTokenId)
     })
 }
+
+const autoDeductBtn = document.getElementById('autoDeductBtn')
+    autoDeductBtn.addEventListener('click', () => {
+        const cust = document.getElementById('custID').textContent
+        const card = document.getElementById('cardID').textContent
+        createVaultedPayment(cust, card, true)
+    })
