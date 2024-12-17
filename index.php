@@ -48,11 +48,11 @@
                 <option value="4123450131000508">4123450131000508</option>
             </select>
             <label for="expMonthField">Enter expiry month below:</label>
-            <input type="text" class="expMonthField" name="expMonthField" placeholder="Expiry month here">
+            <input type="text" class="expMonthField" name="expMonthField" placeholder="Expiry month here" value="12">
             <label for="expYearField">Enter expiry year below:</label>
-            <input type="text" class="expYearField" name="expYearField" placeholder="Expiry year here">
+            <input type="text" class="expYearField" name="expYearField" placeholder="Expiry year here" value="2025">
             <label for="cvcField">Enter cvc below:</label>
-            <input type="text" class="cvcField" name="cvcField" placeholder="CVC here">
+            <input type="text" class="cvcField" name="cvcField" placeholder="CVC here" value="123">
             <!-- <button id="addCardBtn">Add card</button> -->
         </div>
         <div class="window">
@@ -69,10 +69,8 @@
             <span class="text">Saved Customers with Cards</span>
             <div id="savedCards">
                 <div class="flex row item">
-                    <span id="custID" class="wrapLongText">1af2da92-3826-4bad-b963-4502a84d47bf</span>
-                    <span id="cardID"
-                        class="wrapLongText">A4hRK46ejbep0BN1ulzrC6IHnsWoR93gBXGAegjrVlMcr3JOh04fPtt37vUDpzWvNmiZkUlIugjLqRvxcPB0SxsddBaOoPD0dCUeNyJRy2DuK03dpF1NQwFwwscGlp7Gm7osvZDD3dxElvApVVq9DjdXNOi3nL1edqjrfKpa3M
-                    </span>
+                    <span id="custID" class="wrapLongText">Customer ID</span>
+                    <span id="cardID" class="wrapLongText">Card Token ID</span>
                     <button id="autoDeductBtn">Auto Deduct Card</button>
                 </div>
             </div>
