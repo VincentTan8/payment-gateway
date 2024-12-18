@@ -19,6 +19,9 @@
 
 <body>
     <div class="flex">
+        <h2>Payment Gateway Functionality Demo</h2>
+    </div>
+    <div class="flex">
         <div class="window">
             <span class="text">Maya Checkout</span>
             <div id="itemParent"></div>
@@ -56,21 +59,36 @@
             <!-- <button id="addCardBtn">Add card</button> -->
         </div>
         <div class="window">
-            <button id="linkCardBtn">Link Card to Customer</button>
-
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <span>Click below to</span>
+                <span>link card to customer</span>
+            </div>
+            <button id="linkCardBtn">Link Card</button>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <span>Customer and Card Tokens</span>
+                <span>should appear below</span>
+                <span>if successful</span>
+            </div>
+        </div>
+        <div class="window">
+            <span>Link Card first then</span>
             <label for="totalAmtVault">Enter total amount:</label>
             <input type="text" class="totalAmtVault" name="totalAmtVault" placeholder="Total amount here">
             <button id="payAndSaveBtn">Pay and Save a Card</button>
-            <button id="logBtn">Log Tokens</button>
+            <!-- <button id="logBtn">Log Tokens</button> -->
         </div>
     </div>
     <div class="flex">
         <div class="window" style="width: 100%;">
-            <span class="text">Saved Customers with Cards</span>
             <div id="savedCards" style="width:100%;">
+                <div class="flex row" style="justify-content: space-between">
+                    <span style="width: 25%">Customer ID</span>
+                    <span style="width: 45%">Card Token ID</span>
+                    <span></span>
+                </div>
                 <div class="flex row item" style="justify-content: space-between">
-                    <span id="custID" class="wrapLongText" style="width: 25%">Customer ID</span>
-                    <span id="cardID" class="wrapLongText" style="width: 45%">Card Token ID</span>
+                    <span id="custID" class="wrapLongText" style="width: 25%"></span>
+                    <span id="cardID" class="wrapLongText" style="width: 45%"></span>
                     <button id="autoDeductBtn">Auto Deduct Card</button>
                 </div>
             </div>
