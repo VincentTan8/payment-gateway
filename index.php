@@ -67,10 +67,10 @@
     <div class="flex">
         <div class="window" style="width: 100%;">
             <span class="text">Saved Customers with Cards</span>
-            <div id="savedCards">
-                <div class="flex row item">
-                    <span id="custID" class="wrapLongText">Customer ID</span>
-                    <span id="cardID" class="wrapLongText">Card Token ID</span>
+            <div id="savedCards" style="width:100%;">
+                <div class="flex row item" style="justify-content: space-between">
+                    <span id="custID" class="wrapLongText" style="width: 25%">Customer ID</span>
+                    <span id="cardID" class="wrapLongText" style="width: 45%">Card Token ID</span>
                     <button id="autoDeductBtn">Auto Deduct Card</button>
                 </div>
             </div>
