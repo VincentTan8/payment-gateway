@@ -134,6 +134,10 @@ async function postPayment() {
                 setTimeout(() => {
                     window.location.href = result.redirectUrl
                 }, 50)
+            } else {
+                console.log(result.message + ": " +
+                    result.parameters[0].field + " - " +
+                    result.parameters[0].description)
             }
 
         } catch (error) {
@@ -175,6 +179,10 @@ async function createCustomer() {
             console.log("customer id "+result.id)
             customerId = result.id
             return customerId
+        } else {
+            console.log(result.message + ": " +
+                result.parameters[0].field + " - " +
+                result.parameters[0].description)
         }
     } catch (error) {
         console.error('Error:', error)
@@ -215,6 +223,10 @@ async function createCard() {
             //save this info
             console.log("payment token id "+result.paymentTokenId)
             return result.paymentTokenId
+        } else {
+            console.log(result.message + ": " +
+                result.parameters[0].field + " - " +
+                result.parameters[0].description)
         }
     } catch (error) {
         console.error('Error:', error)
@@ -259,6 +271,10 @@ async function linkCardToCustomer() {
             setTimeout(() => {
                 window.location.href = result.verificationUrl
             }, 50)
+        } else {
+            console.log(result.message + ": " +
+                result.parameters[0].field + " - " +
+                result.parameters[0].description)
         }
     } catch (error) {
         console.error('Error:', error)
@@ -300,13 +316,16 @@ async function createVaultedPayment(custId = customerId, cTokenId = cardTokenId,
                 else
                     alert(result.status+"! Paid with "+result.fundSource.details.masked)
             }, 50)
-        } else 
-            console.log(response.status)
+        } else {
+            console.log(result.message + ": " +
+                result.parameters[0].field + " - " +
+                result.parameters[0].description)
+        }
     } catch (error) {
         console.error('Error:', error)
     }
 }
-
+//not used yet
 function addSavedCard() {
     // Create a new "window" div
     const entryDiv = document.createElement('div')
