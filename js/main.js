@@ -1,9 +1,9 @@
 let customerId, cardTokenId
-const logBtn = document.getElementById('logBtn')
-logBtn.addEventListener('click', () => {
-    console.log("customer id "+customerId)
-    console.log("card token id "+cardTokenId)
-})
+// const logBtn = document.getElementById('logBtn')
+// logBtn.addEventListener('click', () => {
+//     console.log("customer id "+customerId)
+//     console.log("card token id "+cardTokenId)
+// })
 
 const addItemBtn = document.getElementById('addItemBtn')
 addItemBtn.addEventListener('click', () => {
@@ -62,7 +62,8 @@ function addItem() {
 }
 //maya checkout
 async function postPayment() {
-    const itemList = document.querySelectorAll('.item')
+    const itemParent = document.getElementById('itemParent')
+    const itemList = itemParent.querySelectorAll('.item')
     const payCurrency = "PHP"
     let totalPay = 0
 
@@ -113,36 +114,25 @@ async function postPayment() {
             items: itemData,
         }
 
-        try {
-            // Send POST request using fetch
-            const response = await fetch('https://pg-sandbox.paymaya.com/checkout/v1/checkouts', {
-                method: 'POST',
-                headers: {
-                    accept: 'application/json',
-                    'content-type': 'application/json',
-                    //should be stored in secure db
-                    //base64 encoding
-                    authorization: 'Basic cGstWjBPU3pMdkljT0kyVUl2RGhkVEdWVmZSU1NlaUdTdG5jZXF3VUU3bjBBaDo=',
-                },
-                body: JSON.stringify(data)
-            })
-
-            // Handle the response
-            const result = await response.json()
-            console.log(result)
-            if(response.status === 200) {
+        fetch('checkout.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({data}),
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.redirectUrl) {
                 setTimeout(() => {
-                    window.location.href = result.redirectUrl
+                    window.open(result.redirectUrl, '_blank')
                 }, 50)
             } else {
-                console.log(result.message + ": " +
-                    result.parameters[0].field + " - " +
-                    result.parameters[0].description)
+                console.error('Error:', result.error, result.field, result.description)
             }
-
-        } catch (error) {
-            console.error('Error:', error)
-        }
+        })
+        .catch(error => console.error('Error:', error))
+        
     } else 
         alert('Invalid Payment Input')
 }
