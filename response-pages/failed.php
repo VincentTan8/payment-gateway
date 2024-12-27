@@ -14,7 +14,7 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 
 </html>
